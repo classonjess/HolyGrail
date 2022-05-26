@@ -47,12 +47,20 @@ function read() {
 function App(){
     const [data, setData] = React.useState({header:0,left:0,article:0,right:0,footer:0});
 
+    React.useEffect(() => {
+        //read db data &update UI
+        const response = read()
+              .then(res => {
+                  setData(res)
+              });
+    })
+
     function handle(section){
-        console.log("Pong", section);
-        const value = data[section.name] + section.value;
-        const object = {[section.name]:value};
-        setData({...data, ...object});
-    }
+       //update db & local state
+       const response = update(section.name, section.value)
+            .then(res => {
+                setData(res)
+            });
 
     return (<>
        <div className="grid">
@@ -68,4 +76,4 @@ function App(){
 ReactDOM.render(
     <App/>,
     document.getElementById('root')
-);
+)}
