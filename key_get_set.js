@@ -3,6 +3,7 @@ var client = redis.createClient();
 
 
 // single value write & read
+client.connect();
 client.set("my_key", "Hello Wold!");
 client.get("my_key", function(err, reply) {
     console.log(reply);
@@ -14,4 +15,9 @@ client.mget(['header', 'left', 'article', 'right', 'footer'],
      function( err, value) {
         console.log(value);
  });
+<<<<<<< Updated upstream
 client.quit();
+=======
+
+ client.quit();
+>>>>>>> Stashed changes
